@@ -1,0 +1,17 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.cache/
+logs/*.jsonl.tmp
+
+# added by group
+.DS_Store
+hello-agent/
+.idea/
+.vscode/
+*.mp4
+# embedding caches (keep under 50 MB / regenerate locally)
+**/cache/
+**/*.npy
