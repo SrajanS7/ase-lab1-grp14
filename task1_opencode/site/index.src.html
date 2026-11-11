@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f2e9">
+  <title>Group 14 — Humans in the Loop</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f5f2e9;
+      --paper-2: #fffdf7;
+      --ink: #202823;
+      --muted: #657069;
+      --line: #c9cec3;
+      --green: #bbf36b;
+      --green-dark: #315526;
+      --hero-mark: #b2bdab;
+      --orange: #f1744f;
+      --blue: #a9d8ee;
+      --lavender: #d9c9fa;
+      --shadow: 5px 5px 0 var(--ink);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      line-height: 1.55;
+      transition: background .25s ease, color .25s ease;
+    }
+    body.night {
+      color-scheme: dark;
+      --paper: #171d1a;
+      --paper-2: #232b26;
+      --ink: #edf2e8;
+      --muted: #b0bcb2;
+      --line: #4c5a50;
+      --green: #b5ed68;
+      --green-dark: #263a1f;
+      --hero-mark: #344239;
+      --orange: #ff9675;
+      --blue: #284c5c;
+      --lavender: #51466a;
+      --shadow: 5px 5px 0 #090d0b;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 900; letter-spacing: -.04em; }
+    .brand-mark { display: grid; width: 34px; height: 34px; place-items: center; border: 2px solid var(--ink); border-radius: 50%; background: var(--green); color: #202823; font-size: 13px; }
+    .topnav { display: flex; align-items: center; gap: 22px; font-size: 12px; font-weight: 800; }
+    .topnav a { text-decoration-thickness: 2px; text-underline-offset: 4px; }
+    .toggle { border: 2px solid var(--ink); border-radius: 999px; background: var(--paper-2); color: var(--ink); padding: 8px 12px; font: inherit; font-size: 12px; font-weight: 800; cursor: pointer; box-shadow: 2px 2px 0 var(--ink); }
+    .toggle:active { transform: translate(2px, 2px); box-shadow: none; }
+    .hero { position: relative; overflow: hidden; padding: 76px 0 66px; border-bottom: 1px solid var(--line); }
+    .hero::after { position: absolute; content: "14"; right: 2%; top: 22px; color: var(--hero-mark); font-size: clamp(150px, 31vw, 350px); font-weight: 1000; line-height: 1; letter-spacing: -.13em; pointer-events: none; z-index: -1; }
+    .eyebrow { display: inline-flex; gap: 9px; align-items: center; color: var(--green-dark); background: var(--green); border: 1px solid var(--ink); padding: 5px 10px; font-size: 11px; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
+    body.night .eyebrow { color: #1a2416; }
+    .eyebrow .dot { width: 7px; height: 7px; background: currentColor; border-radius: 50%; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 780px; margin: 22px 0 18px; font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 950; font-size: clamp(48px, 7vw, 78px); letter-spacing: normal; line-height: 1.16; }
+    .hero-line { display: block; white-space: nowrap; }
+    .hero-line > span { color: var(--orange); }
+    .hero-copy { max-width: 590px; margin-bottom: 28px; color: var(--muted); font-family: ui-sans-serif, system-ui, sans-serif; font-size: clamp(16px, 2.2vw, 19px); }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+    .cta { display: inline-block; border: 2px solid var(--ink); padding: 11px 16px; background: var(--ink); color: var(--paper); font-weight: 900; text-decoration: none; box-shadow: var(--shadow); transition: transform .15s ease; }
+    .cta:hover { transform: translate(2px, 2px); box-shadow: 3px 3px 0 var(--ink); }
+    .hero-note { color: var(--muted); font-size: 11px; }
+    .ticker { overflow: hidden; border-bottom: 2px solid var(--ink); background: var(--green); color: #202823; white-space: nowrap; }
+    .ticker-inner { padding: 9px 0; font-size: 11px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .ticker span { padding: 0 13px; }
+    .ticker b { color: #547b2a; }
+    section { padding: 68px 0; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 22px; margin-bottom: 26px; }
+    .kicker { margin-bottom: 8px; color: var(--muted); font-size: 11px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    h2 { margin-bottom: 0; font-family: ui-sans-serif, system-ui, sans-serif; font-size: clamp(32px, 5vw, 54px); font-weight: 950; line-height: 1.16; letter-spacing: normal; }
+    .section-note { max-width: 280px; margin: 0; color: var(--muted); font-size: 11px; }
+    .crew-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 20px; }
+    .card { grid-column: span 2; overflow: hidden; border: 2px solid var(--ink); background: var(--paper-2); box-shadow: var(--shadow); }
+    .card:nth-child(4) { grid-column: 2 / span 2; }
+    .card:nth-child(5) { grid-column: 4 / span 2; }
+    .portrait { position: relative; display: block; width: 100%; aspect-ratio: 1.35; object-fit: cover; background: var(--blue); border-bottom: 2px solid var(--ink); filter: saturate(.88); }
+    .card:nth-child(2) .portrait { background: var(--lavender); }
+    .card:nth-child(3) .portrait { background: var(--green); }
+    .card:nth-child(4) .portrait { background: var(--orange); }
+    .card:nth-child(5) .portrait { background: var(--blue); }
+    .card-inner { padding: 17px; }
+    .card-meta { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px; color: var(--muted); font-size: 9px; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
+    .card h3 { margin-bottom: 12px; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 25px; line-height: 1; letter-spacing: -.06em; }
+    .detail { margin: 0 0 13px; font-size: 11px; line-height: 1.6; }
+    .detail strong { color: var(--orange); }
+    .fact { margin: 0; border-top: 1px dashed var(--line); padding-top: 12px; color: var(--muted); font-size: 10px; }
+    .fact b { color: var(--ink); }
+    .ai-section { position: relative; background: var(--ink); color: var(--paper); }
+    .ai-section .kicker, .ai-section .section-note { color: color-mix(in srgb, var(--paper), transparent 32%); }
+    .ai-section .section-head { align-items: end; }
+    .ai-section h2 { max-width: 730px; }
+    .ai-board { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 34px; }
+    .ai-panel { padding: 23px; border: 1px solid color-mix(in srgb, var(--paper), transparent 60%); background: color-mix(in srgb, var(--paper), transparent 94%); }
+    .ai-panel.agree { border-top: 5px solid var(--green); }
+    .ai-panel.differ { border-top: 5px solid var(--orange); }
+    .ai-panel h3 { margin-bottom: 16px; font-size: 13px; letter-spacing: .05em; text-transform: uppercase; }
+    .ai-panel ul { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
+    .ai-panel li { position: relative; padding-left: 23px; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 14px; }
+    .ai-panel li::before { position: absolute; left: 0; top: 0; color: var(--green); content: "↳"; font-family: monospace; font-weight: 900; }
+    .differ li::before { color: var(--orange); }
+    .quote-strip { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 16px; }
+    .quote { min-height: 122px; padding: 17px; background: var(--green); color: #202823; font-size: 11px; font-weight: 800; }
+    .quote:nth-child(2) { background: var(--blue); }
+    .quote:nth-child(3) { background: var(--lavender); }
+    .quote cite { display: block; margin-top: 12px; font-size: 9px; font-style: normal; text-transform: uppercase; letter-spacing: .08em; }
+    .future { padding: 62px 0; }
+    .future-box { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px; padding: 26px; border: 2px solid var(--ink); background: var(--orange); color: #251d19; box-shadow: var(--shadow); }
+    .future-box h2 { max-width: 600px; font-size: clamp(26px, 4vw, 41px); }
+    .future-box p { max-width: 620px; margin: 12px 0 0; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 14px; }
+    .big-arrow { display: grid; width: 72px; height: 72px; place-items: center; border: 2px solid #251d19; border-radius: 50%; font-size: 34px; transform: rotate(-35deg); }
+    footer { border-top: 1px solid var(--line); padding: 24px 0 36px; color: var(--muted); font-size: 10px; }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 15px; }
+    .footer-row strong { color: var(--ink); }
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 32px, 600px); }
+      .topbar { padding: 15px 0; }
+      .topnav { gap: 12px; }
+      .topnav a { display: none; }
+      .hero { padding: 57px 0 47px; }
+      .hero::after { top: 0; right: 0; font-size: clamp(64px, 18vw, 90px); }
+      section { padding: 52px 0; }
+      .section-head { display: block; }
+      .section-note { margin-top: 13px; }
+      .crew-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+      .card { grid-column: auto !important; }
+      .card:last-child { grid-column: 1 / -1 !important; width: calc(50% - 7px); justify-self: center; }
+      .card-inner { padding: 13px; }
+      .card h3 { font-size: 22px; }
+      .ai-board { grid-template-columns: 1fr; }
+      .quote-strip { grid-template-columns: 1fr; }
+      .quote { min-height: auto; }
+      .future-box { grid-template-columns: 1fr; padding: 21px; }
+      .big-arrow { width: 52px; height: 52px; font-size: 25px; }
+    }
+    @media (max-width: 420px) {
+      .wrap { width: calc(100% - 26px); }
+      .brand { font-size: 12px; }
+      .brand-mark { width: 30px; height: 30px; }
+      .toggle { padding: 7px 9px; font-size: 10px; }
+      h1 { font-size: clamp(30px, 9.2vw, 58px); line-height: 1.16; letter-spacing: normal; }
+      .hero-copy { font-size: 15px; }
+      .crew-grid { gap: 11px; }
+      .card-inner { padding: 10px; }
+      .card-meta { font-size: 8px; }
+      .card h3 { font-size: 20px; }
+      .detail { font-size: 10px; }
+      .fact { font-size: 9px; }
+      .footer-row { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="brand" href="#top" aria-label="Group 14 home"><span class="brand-mark">G14</span><span>HUMANS IN THE LOOP</span></a>
+    <nav class="topnav" aria-label="Main navigation">
+      <a href="#crew">The crew</a>
+      <a href="#ai">Our AI take</a>
+      <button class="toggle" id="theme-toggle" type="button" aria-pressed="false">☾ Night mode</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap" aria-labelledby="hero-title">
+      <div class="eyebrow"><span class="dot"></span> Paderborn University · Group 14</div>
+      <h1 id="hero-title"><span class="hero-line">We build things</span><span class="hero-line">We <span>double-check</span></span><span class="hero-line">the things</span></h1>
+      <p class="hero-copy">Five computer scientists, one shared instinct: let the tools help, keep the humans responsible. Meet the people behind the prompts, pull requests and 3 a.m. hot takes.</p>
+      <div class="hero-actions"><a class="cta" href="#crew">Meet your engineering team ↘</a><span class="hero-note">CURRENT STATUS: curious / caffeinated / reviewing</span></div>
+    </section>
+
+    <div class="ticker" aria-label="Team motto"><div class="ticker-inner"><span>BUILD</span><b>✳</b><span>TEST</span><b>✳</b><span>READ THE CODE</span><b>✳</b><span>BUILD</span><b>✳</b><span>TEST</span><b>✳</b><span>READ THE CODE</span><b>✳</b><span>BUILD</span><b>✳</b><span>TEST</span><b>✳</b><span>READ THE CODE</span></div></div>
+
+    <section class="wrap" id="crew" aria-labelledby="crew-title">
+      <div class="section-head">
+        <div><p class="kicker">01 / The humans</p><h2 id="crew-title">Meet the crew.</h2></div>
+        <p class="section-note">Different routes into computer science. The same excellent habit of asking “but did we test it?”</p>
+      </div>
+      <div class="crew-grid">
+        <article class="card">
+          <img class="portrait" src="{{image:aryan.jpg}}" alt="Portrait of Aryan">
+          <div class="card-inner"><div class="card-meta"><span>01 / backend & agents</span><span>● online</span></div><h3>Aryan</h3>
+            <p class="detail"><strong>STUDY / WORK</strong><br>M.Sc. Computer Science at Paderborn; B.Sc. Computer Science from Chandigarh University. Former Associate Software Engineer at Toddle, plus a research internship at NYCU in Taiwan.</p>
+            <p class="detail"><strong>INTO</strong><br>Agentic AI, backend systems, learning German one Artikel at a time.</p>
+            <p class="fact"><b>FUN FACT →</b> His German is A2, so he and his coding agent are both still learning to follow instructions.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img class="portrait" src="{{image:cemon.jpg}}" alt="Portrait of Cemon">
+          <div class="card-inner"><div class="card-meta"><span>02 / the next episode</span><span>● online</span></div><h3>Cemon</h3>
+            <p class="detail"><strong>STUDY / WORK</strong><br>M.Sc. Computer Science at Paderborn; B.E. in Computer Science and Engineering from Dayananda Sagar College of Engineering, Bangalore. 3.5 years as a software developer.</p>
+            <p class="detail"><strong>INTO</strong><br>Music and AI concepts.</p>
+            <p class="fact"><b>FUN FACT →</b> One episode can become 3 a.m. somehow. The autoplay button knows.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img class="portrait" src="{{image:rachana.jpg}}" alt="Portrait of Rachana">
+          <div class="card-inner"><div class="card-meta"><span>03 / tabs multiply</span><span>● online</span></div><h3>Rachana</h3>
+            <p class="detail"><strong>STUDY / WORK</strong><br>M.Sc. Computer Science at Paderborn; B.E. in Artificial Intelligence and Data Science from East West Institute of Technology, Bangalore.</p>
+            <p class="detail"><strong>INTO</strong><br>Machine learning, data science, AI-powered apps, reading, music and cooking.</p>
+            <p class="fact"><b>FUN FACT →</b> Opens the laptop for one quick thing; emerges with 15 tabs and a different task.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img class="portrait" src="{{image:shrividya.jpg}}" alt="Portrait of Shrividya">
+          <div class="card-inner"><div class="card-meta"><span>04 / passes the ball</span><span>● online</span></div><h3>Shrividya</h3>
+            <p class="detail"><strong>STUDY / WORK</strong><br>M.Sc. Computer Science at Paderborn; B.E. in Information Science and Engineering from Global Academy of Technology, Bengaluru. Cybersecurity internships in cloud security, DevSecOps and security automation.</p>
+            <p class="detail"><strong>INTO</strong><br>Sketching, basketball, dancing, new places and cultures, and trying new technologies.</p>
+            <p class="fact"><b>FUN FACT →</b> Basketball taught her teamwork—even when nobody wants to pass the ball.</p>
+          </div>
+        </article>
+        <article class="card">
+          <img class="portrait" src="{{image:srajan.jpg}}" alt="Portrait of Srajan">
+          <div class="card-inner"><div class="card-meta"><span>05 / cloud & football</span><span>● online</span></div><h3>Srajan</h3>
+            <p class="detail"><strong>STUDY / WORK</strong><br>M.Sc. Computer Science at Paderborn; B.E. in Computer Science and Engineering from New Horizon College of Engineering, Bangalore. Former Cloud Engineer at AWS; now a Werkstudent data scientist at Uniper.</p>
+            <p class="detail"><strong>INTO</strong><br>Football, video games and cloud architecture.</p>
+            <p class="fact"><b>FUN FACT →</b> Can watch a 0–0 draw for 90 minutes and call it tactically fascinating.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="ai-section" id="ai" aria-labelledby="ai-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div><p class="kicker">02 / The group chat, summarized</p><h2 id="ai-title">Our shared view on AI and the future of software engineering</h2></div>
+          <p class="section-note">Five perspectives, one strong review culture. Nobody gave the bot production access.</p>
+        </div>
+        <div class="ai-board">
+          <article class="ai-panel agree"><h3>Where we agree / human judgment stays on call</h3>
+            <ul>
+              <li>AI makes coding faster: useful for boilerplate, first drafts, tests, refactoring, finding bugs and exploring possible solutions.</li>
+              <li>Its output is a draft, not a verdict. It can invent APIs, make mistakes that are easy to miss, or offer a perfectly formatted guess.</li>
+              <li>Developers remain responsible for testing, reviewing and understanding the result. Human judgment is what checks that it is correct, reliable and solves the real problem.</li>
+              <li>Over the next 5–10 years, we expect more time spent specifying, planning, guiding agents and verifying their work—and less time writing every line from scratch.</li>
+            </ul>
+          </article>
+          <article class="ai-panel differ"><h3>Where the emphasis differs / same destination, different route</h3>
+            <ul>
+              <li>Aryan calls out system design, clear specifications, testing and observability; Rachana stresses problem-solving and keeping coding knowledge sharp.</li>
+              <li>Cemon puts clear requirements and prompt engineering front and center as AI takes on most coding tasks.</li>
+              <li>Shrividya imagines agents handling bigger jobs—including testing and bug fixes—while fundamentals help us catch their mistakes.</li>
+              <li>Srajan adds explainability to the core skills: if we cannot explain an AI's choice, it is still a guess.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="quote-strip" aria-label="Team hot takes">
+          <blockquote class="quote">“AI won't replace developers who write tests. It will replace the ones who never read the code it writes.”<cite>— Aryan / hot take</cite></blockquote>
+          <blockquote class="quote">“AI can write a thousand lines of code in seconds, but finding the one tiny mistake that breaks everything is a different story.”<cite>— Rachana / hot take</cite></blockquote>
+          <blockquote class="quote">“An AI you can’t explain is just a very expensive guess with good formatting.”<cite>— Srajan / hot take</cite></blockquote>
+        </div>
+        <div class="quote-strip">
+          <blockquote class="quote">“Software engineers spend time and take responsibility for testing the code which they didn't write.”<cite>— Cemon / hot take</cite></blockquote>
+          <blockquote class="quote">“AI can write the code, but it cannot take responsibility when the system breaks at 3 AM!”<cite>— Shrividya / hot take</cite></blockquote>
+          <blockquote class="quote">TEAM RULE: ship the assist, keep the accountability.<cite>— Group 14 / release checklist</cite></blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="future wrap" aria-label="Team outlook">
+      <div class="future-box">
+        <div><p class="kicker">Forecast / 5–10 years</p><h2>Less typing. More thinking. Still read the diff.</h2><p>Our shared bet: software engineers will spend more time shaping the problem, checking the system and making decisions. AI may become a normal teammate; knowing the basics is how we know when that teammate is confidently wrong.</p></div>
+        <div class="big-arrow" aria-hidden="true">↗</div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap footer-row"><span><strong>GROUP 14</strong> · built with human judgment (and a few helpful tools)</span><span>NO CDN · NO MAGIC FONTS · ALL HUMANS</span></div></footer>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const savedTheme = localStorage.getItem('group14-theme');
+    if (savedTheme === 'night') document.body.classList.add('night');
+    function syncThemeButton() {
+      const night = document.body.classList.contains('night');
+      themeToggle.textContent = night ? '☀ Day mode' : '☾ Night mode';
+      themeToggle.setAttribute('aria-pressed', String(night));
+    }
+    syncThemeButton();
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('night');
+      const night = document.body.classList.contains('night');
+      localStorage.setItem('group14-theme', night ? 'night' : 'day');
+      syncThemeButton();
+    });
+  </script>
+</body>
+</html>
