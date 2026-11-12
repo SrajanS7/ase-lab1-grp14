@@ -1,0 +1,16 @@
+recursive  64: {'chunk_s': 0.27, 'n_chunks': 3292, 'n_docs': 932, 'tokens_min': 21, 'tokens_median': 50, 'tokens_mean': 48.2, 'tokens_max': 64, 'embed_s': 37.0, 'embed_cached_now': True}
+recursive 128: {'chunk_s': 0.1, 'n_chunks': 1324, 'n_docs': 932, 'tokens_min': 27, 'tokens_median': 93, 'tokens_mean': 96.9, 'tokens_max': 128, 'embed_s': 18.09, 'embed_cached_now': True}
+recursive 256: {'chunk_s': 0.033, 'n_chunks': 958, 'n_docs': 932, 'tokens_min': 77, 'tokens_median': 120, 'tokens_mean': 128.2, 'tokens_max': 255, 'embed_s': 10.64, 'embed_cached_now': True}
+    fixed  64: {'chunk_s': 0.02, 'n_chunks': 2782, 'n_docs': 932, 'tokens_min': 12, 'tokens_median': 61, 'tokens_mean': 54.7, 'tokens_max': 85, 'embed_s': 41.71, 'embed_cached_now': True}
+    fixed 128: {'chunk_s': 0.02, 'n_chunks': 1309, 'n_docs': 932, 'tokens_min': 14, 'tokens_median': 113, 'tokens_mean': 98.1, 'tokens_max': 149, 'embed_s': 16.29, 'embed_cached_now': True}
+    fixed 256: {'chunk_s': 0.02, 'n_chunks': 962, 'n_docs': 932, 'tokens_min': 36, 'tokens_median': 120, 'tokens_mean': 127.7, 'tokens_max': 288, 'embed_s': 13.31, 'embed_cached_now': True}
+chosen chunk size: 64
+chosen alpha: 0.6
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/105 [00:00<?, ?it/s]Loading weights: 100%|██████████| 105/105 [00:00<00:00, 12015.44it/s]
+r1 {'recall': 0.5833, 'precision': 0.5515, 'recall_identifier': 0.9667, 'recall_paraphrase': 0.2333, 'recall_multi-hop': 0.4333, 'recall_version': 0.7}
+r2 {'recall': 0.6083, 'precision': 0.5114, 'recall_identifier': 0.6333, 'recall_paraphrase': 0.9, 'recall_multi-hop': 0.0333, 'recall_version': 0.8667}
+r3 {'recall': 0.625, 'precision': 0.521, 'recall_identifier': 0.7, 'recall_paraphrase': 0.8667, 'recall_multi-hop': 0.0, 'recall_version': 0.9333}
+r4 {'recall': 0.6792, 'precision': 0.6029, 'recall_identifier': 0.9333, 'recall_paraphrase': 0.6667, 'recall_multi-hop': 0.35, 'recall_version': 0.7667}
+r5 {'recall': 0.6, 'precision': 0.5578, 'recall_identifier': 0.6333, 'recall_paraphrase': 0.5, 'recall_multi-hop': 0.2667, 'recall_version': 1.0}
+done. results in /Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/task3_rag/results

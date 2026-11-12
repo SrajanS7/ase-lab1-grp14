@@ -1,0 +1,98 @@
+{
+  "date": "2026-11-12 13:23",
+  "git_commit": "b6724be5af3e2cf752a2fef5df1da8a97be1a09d",
+  "embedding_model": "kiconnect.qwen3-embedding-8b",
+  "cross_encoder": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+  "chunk_sizes_compared": [
+    64,
+    128,
+    256
+  ],
+  "overlap_tokens": 16,
+  "chosen_chunk_size": 64,
+  "alphas_compared": [
+    0.0,
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9,
+    1.0
+  ],
+  "chosen_alpha": 0.6,
+  "candidates_per_search": 30,
+  "rerank_depth": 30,
+  "tuning": "chunk size and alpha chosen by recall@5 (tie: precision@5) on dev questions with odd ids",
+  "indexing": {
+    "recursive_64": {
+      "chunk_s": 0.27,
+      "n_chunks": 3292,
+      "n_docs": 932,
+      "tokens_min": 21,
+      "tokens_median": 50,
+      "tokens_mean": 48.2,
+      "tokens_max": 64,
+      "embed_s": 37.0,
+      "embed_cached_now": true
+    },
+    "recursive_128": {
+      "chunk_s": 0.1,
+      "n_chunks": 1324,
+      "n_docs": 932,
+      "tokens_min": 27,
+      "tokens_median": 93,
+      "tokens_mean": 96.9,
+      "tokens_max": 128,
+      "embed_s": 18.09,
+      "embed_cached_now": true
+    },
+    "recursive_256": {
+      "chunk_s": 0.033,
+      "n_chunks": 958,
+      "n_docs": 932,
+      "tokens_min": 77,
+      "tokens_median": 120,
+      "tokens_mean": 128.2,
+      "tokens_max": 255,
+      "embed_s": 10.64,
+      "embed_cached_now": true
+    },
+    "fixed_64": {
+      "chunk_s": 0.02,
+      "n_chunks": 2782,
+      "n_docs": 932,
+      "tokens_min": 12,
+      "tokens_median": 61,
+      "tokens_mean": 54.7,
+      "tokens_max": 85,
+      "embed_s": 41.71,
+      "embed_cached_now": true
+    },
+    "fixed_128": {
+      "chunk_s": 0.02,
+      "n_chunks": 1309,
+      "n_docs": 932,
+      "tokens_min": 14,
+      "tokens_median": 113,
+      "tokens_mean": 98.1,
+      "tokens_max": 149,
+      "embed_s": 16.29,
+      "embed_cached_now": true
+    },
+    "fixed_256": {
+      "chunk_s": 0.02,
+      "n_chunks": 962,
+      "n_docs": 932,
+      "tokens_min": 36,
+      "tokens_median": 120,
+      "tokens_mean": 127.7,
+      "tokens_max": 288,
+      "embed_s": 13.31,
+      "embed_cached_now": true
+    }
+  }
+}

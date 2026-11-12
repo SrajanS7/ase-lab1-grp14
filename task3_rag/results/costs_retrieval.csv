@@ -1,0 +1,6 @@
+config,n_chunks,index_chunk_s,index_embed_s,index_bm25_s,index_crossencoder_load_s,latency_median_s,latency_p95_s,latency_local_median_s,llm_tokens_per_query,n_queries,n_excluded_rate_limited
+R1,3292,0.27,0.0,0.051,0.0,0.0027,0.0042,0.0027,0,250,0
+R2,2782,0.02,41.71,0.0,0.0,0.1281,0.2572,0.0008,0,248,2
+R3,3292,0.27,37.0,0.0,0.0,0.1282,0.2574,0.0009,0,248,2
+R4,3292,0.27,37.0,0.051,0.0,0.1316,0.2616,0.0041,0,248,2
+R5,3292,0.27,37.0,0.051,4.21,0.2474,0.3876,0.1208,0,248,2

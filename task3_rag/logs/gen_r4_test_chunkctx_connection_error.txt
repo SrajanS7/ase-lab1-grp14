@@ -1,0 +1,200 @@
+test001: '`--include-internal` also shows internal system objects (names starting with `__`).'
+test003: '`--since` only considers objects created after the specified timestamp, which must be in I'
+test004: 'The documentation does not contain this information.'
+test002: '`PQ-E2187` means the partitioner’s in-memory buffer is full and new data is rejected; the '
+test005: 'The documentation does not contain this information.'
+test007: 'The documentation does not contain this information.'
+test006: 'The documentation does not contain this information.'
+test008: 'The default value of `auth.max_retries` in PaderQueue 3.x was `20`.'
+test009: 'The documentation does not contain this information.'
+test010: 'The documentation does not contain this information.'
+test011: 'The documentation does not contain this information.'
+test013: 'The documentation does not contain this information.'
+test012: 'The documentation does not contain this information.'
+test014: 'The documentation does not contain this information.'
+test018: 'The documentation does not contain this information.'
+test015: 'The documentation does not contain this information.'
+test017: 'The documentation does not contain this information.'
+test016: 'The error is `PQ-E2547 COMPACTOR_COMPONENT_DISABLED`.'
+test021: 'The documentation does not contain this information.'
+test019: 'The documentation does not contain this information.'
+test020: 'The documentation does not contain this information.'
+test022: 'In PaderQueue 2.x, the default value of `snapshotter.max_connections` was `256`.'
+test023: 'The documentation does not contain this information.'
+test024: 'The documentation does not contain this information.'
+test025: 'The documentation does not contain this information.'
+test026: 'The documentation does not contain this information.'
+test027: 'The documentation does not contain this information.'
+test028: '`partitioner.buffer_bytes` determines the in-memory buffer size for the logic that assigns'
+test029: 'The documentation does not contain this information.'
+test030: 'The documentation does not contain this information.'
+test032: 'The documentation does not contain this information.'
+test033: 'The documentation does not contain this information.'
+test031: 'The default changed in release `3.0`; before that, it was `300` seconds.'
+test035: 'The documentation does not contain this information.'
+test034: 'The documentation does not contain this information.'
+test036: 'The documentation does not contain this information.'
+test037: 'The documentation does not contain this information.'
+test038: 'The documentation does not contain this information.'
+test039: '`scheduler.buffer_bytes` determines the in-memory buffer size for the scheduler that relea'
+test042: 'The documentation does not contain this information.'
+test043: 'The documentation does not contain this information.'
+test041: 'The documentation does not contain this information.'
+test040: 'The error is `PQ-E4711` (`ACKTRACKER_OPERATION_TIMEOUT`).'
+test044: 'The documentation does not contain this information.'
+test046: 'The default value of `partitioner.compression` in PaderQueue 3.x was `lz4`.'
+test048: 'The documentation does not contain this information.'
+test047: 'The documentation does not contain this information.'
+test049: 'The documentation does not contain this information.'
+test051: 'The documentation does not contain this information.'
+test050: '`ingress.log_level` controls the log verbosity of the HTTP ingress gateway that accepts me'
+test053: 'The default value of `retention.batch_size` in PaderQueue 3.x was `32`.'
+test045: 'The documentation does not contain this information.'
+test055: 'The error is `SPOOL_CODEC_MISMATCH` (`PQ-E4020`).'
+test052: 'The documentation does not contain this information.'
+[llm_client] APITimeoutError, retrying in 2s ...
+[llm_client] APIConnectionError, retrying in 4s ...
+[llm_client] APITimeoutError, retrying in 2s ...
+[llm_client] APITimeoutError, retrying in 2s ...
+[llm_client] APITimeoutError, retrying in 2s ...
+[llm_client] APIConnectionError, retrying in 4s ...
+[llm_client] APIConnectionError, retrying in 8s ...
+[llm_client] APIConnectionError, retrying in 4s ...
+[llm_client] APIConnectionError, retrying in 4s ...
+[llm_client] APIConnectionError, retrying in 8s ...
+[llm_client] APIConnectionError, retrying in 8s ...
+[llm_client] APIConnectionError, retrying in 8s ...
+[llm_client] APIConnectionError, retrying in 16s ...
+[llm_client] APIConnectionError, retrying in 16s ...
+[llm_client] APIConnectionError, retrying in 16s ...
+[llm_client] APIConnectionError, retrying in 16s ...
+[llm_client] APIConnectionError, retrying in 32s ...
+[llm_client] APIConnectionError, retrying in 32s ...
+[llm_client] APIConnectionError, retrying in 32s ...
+[llm_client] APIConnectionError, retrying in 32s ...
+[llm_client] APIConnectionError, retrying in 2s ...
+[llm_client] APIConnectionError, retrying in 4s ...
+[llm_client] APIConnectionError, retrying in 8s ...
+[llm_client] APIConnectionError, retrying in 16s ...
+[llm_client] APIConnectionError, retrying in 32s ...
+Traceback (most recent call last):
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/httpx2/_transports/default.py", line 98, in map_httpcore_exceptions
+    yield
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/httpx2/_transports/default.py", line 245, in handle_request
+    resp = self._pool.handle_request(req)
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/httpcore2/_sync/connection_pool.py", line 242, in handle_request
+    raise exc from None
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/httpcore2/_sync/connection_pool.py", line 224, in handle_request
+    response = connection.handle_request(pool_request.request)
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/httpcore2/_sync/connection.py", line 94, in handle_request
+    raise exc
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/httpcore2/_sync/connection.py", line 74, in handle_request
+    stream = self._connect(request)
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/httpcore2/_sync/connection.py", line 117, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/httpcore2/_backends/sync.py", line 203, in connect_tcp
+    with map_exceptions(exc_map):
+         ~~~~~~~~~~~~~~^^^^^^^^^
+  File "/opt/miniconda3/lib/python3.13/contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/httpcore2/_exceptions.py", line 17, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore2.ConnectError: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/openai/_base_client.py", line 1076, in request
+    response = self._send_request(
+        request,
+        stream=stream or self._should_stream_response_body(request=request),
+        **kwargs,
+    )
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/openai/_client.py", line 599, in _send_request
+    response = self._send_with_auth_retry(request, stream=stream, **kwargs)
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/openai/_client.py", line 578, in _send_with_auth_retry
+    response = super()._send_request(request, stream=stream, **kwargs)
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/openai/_base_client.py", line 999, in _send_request
+    return self._client.send(request, stream=stream, **kwargs)
+           ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/httpx2/_client.py", line 980, in send
+    response = self._send_handling_auth(
+        request,
+    ...<2 lines>...
+        history=[],
+    )
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/httpx2/_client.py", line 1008, in _send_handling_auth
+    response = self._send_handling_redirects(
+        request,
+        follow_redirects=follow_redirects,
+        history=history,
+    )
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/httpx2/_client.py", line 1043, in _send_handling_redirects
+    response = self._send_single_request(request)
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/httpx2/_client.py", line 1076, in _send_single_request
+    response = transport.handle_request(request)
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/httpx2/_transports/default.py", line 244, in handle_request
+    with map_httpcore_exceptions():
+         ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/opt/miniconda3/lib/python3.13/contextlib.py", line 162, in __exit__
+    self.gen.throw(value)
+    ~~~~~~~~~~~~~~^^^^^^^
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/httpx2/_transports/default.py", line 115, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx2.ConnectError: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/task3_rag/generate.py", line 128, in <module>
+    main()
+    ~~~~^^
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/task3_rag/generate.py", line 111, in main
+    rows = list(pool.map(answer, questions))
+  File "/opt/miniconda3/lib/python3.13/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/opt/miniconda3/lib/python3.13/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ~~~~~~~~~~^^^^^^^^^
+  File "/opt/miniconda3/lib/python3.13/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/opt/miniconda3/lib/python3.13/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/opt/miniconda3/lib/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/task3_rag/generate.py", line 96, in answer
+    response = llm._chat_request(messages, None, None)  # full response, so we get the token usage
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/common/llm_client.py", line 152, in _chat_request
+    response, meta = self._with_retries(lambda: self._create(self._client.chat.completions, **params))
+                     ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/common/llm_client.py", line 248, in _with_retries
+    return fn()
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/common/llm_client.py", line 152, in <lambda>
+    response, meta = self._with_retries(lambda: self._create(self._client.chat.completions, **params))
+                                                ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/common/llm_client.py", line 232, in _create
+    raw = raw_api.create(**params)
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/openai/_legacy_response.py", line 369, in wrapped
+    return cast(LegacyAPIResponse[R], func(*args, **kwargs))
+                                      ~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/openai/_utils/_utils.py", line 298, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/openai/resources/chat/completions/completions.py", line 1308, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<53 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/openai/_base_client.py", line 1368, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/srajansharma/Documents/Masters/2nd Sem/ASE/group_project/lab1/.venv/lib/python3.13/site-packages/openai/_base_client.py", line 1111, in request
+    raise APIConnectionError(request=request) from err
+openai.APIConnectionError: Connection error.

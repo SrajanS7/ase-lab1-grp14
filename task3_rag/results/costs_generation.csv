@@ -1,0 +1,6 @@
+file,n,prompt_tokens_mean,completion_tokens_mean,reasoning_tokens_mean,cost_usd_per_query,cost_usd_total,latency_median_s
+answers_r3_dev_sample50.jsonl,50,1028,38,18,0.000122,0.0061,2.14
+answers_r3_dev_sample50_chunkctx.jsonl,50,878,43,23,0.000109,0.0055,2.12
+answers_r4_dev_sample50.jsonl,50,1002,41,22,0.000121,0.006,2.38
+answers_r4_dev_sample50_chunkctx.jsonl,50,842,46,27,0.000107,0.0054,2.09
+answers_r4_test.jsonl,100,987,44,25,0.000121,0.0121,2.41

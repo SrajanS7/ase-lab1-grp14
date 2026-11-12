@@ -1,0 +1,48 @@
+# Retrieval results on dev (k = 5 documents)
+
+R = context recall@5, P = context precision@5 (evaluate.py). Chunk size 64 tokens, overlap 16, alpha = 0.6. n = 120 answerable questions (30 per category); held-out = the 60 answerable questions with even ids, not used for tuning.
+
+| config | identifier R / P | paraphrase R / P | multi-hop R / P | version R / P | **overall R / P** | held-out R / P | overall R@10 |
+|---|---|---|---|---|---|---|---|
+| R1 BM25 | 0.967 / 0.731 | 0.233 / 0.124 | 0.433 / 0.698 | 0.700 / 0.653 | **0.583 / 0.552** | 0.509 / 0.495 | 0.717 |
+| R2 fixed+dense | 0.633 / 0.600 | 0.900 / 0.768 | 0.033 / 0.022 | 0.867 / 0.656 | **0.608 / 0.511** | 0.612 / 0.533 | 0.633 |
+| R3 recursive+dense | 0.700 / 0.562 | 0.867 / 0.778 | 0.000 / 0.000 | 0.933 / 0.744 | **0.625 / 0.521** | 0.655 / 0.544 | 0.637 |
+| R4 hybrid | 0.933 / 0.732 | 0.667 / 0.477 | 0.350 / 0.577 | 0.767 / 0.626 | **0.679 / 0.603** | 0.647 / 0.602 | 0.792 |
+| R5 hybrid+rerank | 0.633 / 0.498 | 0.500 / 0.288 | 0.267 / 0.533 | 1.000 / 0.911 | **0.600 / 0.558** | 0.595 / 0.567 | 0.683 |
+
+# End-to-end results (judge.py --sample 50)
+
+faithfulness: mean over answers that make claims (abstentions not scored). correctness: 1 / 0.5 / 0 (correct / partial / wrong).
+
+| config | category | n | abstained | faithfulness | answer relevance | correctness |
+|---|---|---|---|---|---|---|
+| r3 | paraphrase | 10 | 0.000 | 1.000 | 0.721 | 1.000 |
+| r3 | identifier | 10 | 0.400 | 1.000 | 0.687 | 0.600 |
+| r3 | version | 10 | 0.000 | 1.000 | 0.777 | 1.000 |
+| r3 | unanswerable | 10 | 1.000 | – | 0.433 | 1.000 |
+| r3 | multi-hop | 10 | 1.000 | – | 0.372 | 0.000 |
+| r3 | **overall** | 50 | 0.480 | 1.000 | 0.598 | 0.720 |
+| r3_chunkctx | paraphrase | 10 | 0.000 | 1.000 | 0.706 | 1.000 |
+| r3_chunkctx | identifier | 10 | 0.600 | 1.000 | 0.615 | 0.400 |
+| r3_chunkctx | version | 10 | 0.100 | 1.000 | 0.737 | 0.900 |
+| r3_chunkctx | unanswerable | 10 | 1.000 | – | 0.423 | 1.000 |
+| r3_chunkctx | multi-hop | 10 | 1.000 | – | 0.369 | 0.000 |
+| r3_chunkctx | **overall** | 50 | 0.540 | 1.000 | 0.570 | 0.660 |
+| r4 | paraphrase | 10 | 0.200 | 1.000 | 0.665 | 0.700 |
+| r4 | identifier | 10 | 0.000 | 1.000 | 0.706 | 0.900 |
+| r4 | version | 10 | 0.000 | 1.000 | 0.752 | 1.000 |
+| r4 | unanswerable | 10 | 1.000 | – | 0.433 | 1.000 |
+| r4 | multi-hop | 10 | 1.000 | – | 0.370 | 0.000 |
+| r4 | **overall** | 50 | 0.440 | 1.000 | 0.585 | 0.720 |
+| r4_chunkctx | paraphrase | 10 | 0.200 | 1.000 | 0.637 | 0.700 |
+| r4_chunkctx | identifier | 10 | 0.300 | 1.000 | 0.667 | 0.600 |
+| r4_chunkctx | version | 10 | 0.300 | 1.000 | 0.684 | 0.700 |
+| r4_chunkctx | unanswerable | 10 | 1.000 | – | 0.428 | 1.000 |
+| r4_chunkctx | multi-hop | 10 | 1.000 | – | 0.369 | 0.000 |
+| r4_chunkctx | **overall** | 50 | 0.560 | 1.000 | 0.557 | 0.600 |
+
+{'file': 'answers_r3_dev_sample50.jsonl', 'n': 50, 'prompt_tokens_mean': 1028, 'completion_tokens_mean': 38, 'reasoning_tokens_mean': 18, 'cost_usd_per_query': 0.000122, 'cost_usd_total': 0.0061, 'latency_median_s': 2.14}
+{'file': 'answers_r3_dev_sample50_chunkctx.jsonl', 'n': 50, 'prompt_tokens_mean': 878, 'completion_tokens_mean': 43, 'reasoning_tokens_mean': 23, 'cost_usd_per_query': 0.000109, 'cost_usd_total': 0.0055, 'latency_median_s': 2.12}
+{'file': 'answers_r4_dev_sample50.jsonl', 'n': 50, 'prompt_tokens_mean': 1002, 'completion_tokens_mean': 41, 'reasoning_tokens_mean': 22, 'cost_usd_per_query': 0.000121, 'cost_usd_total': 0.006, 'latency_median_s': 2.38}
+{'file': 'answers_r4_dev_sample50_chunkctx.jsonl', 'n': 50, 'prompt_tokens_mean': 842, 'completion_tokens_mean': 46, 'reasoning_tokens_mean': 27, 'cost_usd_per_query': 0.000107, 'cost_usd_total': 0.0054, 'latency_median_s': 2.09}
+{'file': 'answers_r4_test.jsonl', 'n': 100, 'prompt_tokens_mean': 987, 'completion_tokens_mean': 44, 'reasoning_tokens_mean': 25, 'cost_usd_per_query': 0.000121, 'cost_usd_total': 0.0121, 'latency_median_s': 2.41}
