@@ -4,7 +4,7 @@
 M.Sc. Computer Science at Paderborn University (started April 2026). B.Sc. in Computer Science from Chandigarh University, India. Before the master's: 2+ years as an Associate Software Engineer at Toddle, working on a Node.js production platform (APIs, performance, testing), plus a research internship at NYCU in Taiwan.
 
 ## Interests
-Agentic AI, backend systems, and learning German one Artikel at a time
+Agentic AI, backend systems and Machine Learning
 
 ## Fun fact
 My German is A2, so my coding agent and I are both still learning to follow instructions.

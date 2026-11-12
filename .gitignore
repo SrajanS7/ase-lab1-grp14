@@ -15,3 +15,6 @@ hello-agent/
 # embedding caches (keep under 50 MB / regenerate locally)
 **/cache/
 **/*.npy
+
+# Task 4: generated workspace is not submitted
+task4_tools/workspace/
