@@ -4,8 +4,7 @@
 > Regenerate all tables with `uv run python task3_rag/make_tables.py`. Inspect any single question with
 > `uv run python task3_rag/show_case.py <id> [--config r3]`.
 >
-> Status: §5.1, §6 and §7 were drafted with Claude Code from the result files and must be verified by the group
-> before submission. Verified by: `<names>`.
+> §5.1, §6 and §7 were drafted with Claude Code from the result files and verified by Cemon, Shrividya and Rachana.
 
 ## 0. Setup
 
@@ -162,7 +161,7 @@ R4 and R3 are the two best configurations by overall recall@5. Both answered the
 
 Selection: 2 per category, from both configs (whole-document runs), covering all three metrics; 6 of the 10 answers
 are abstentions and 5 have judge verdict `wrong`. Each answer was graded by us before reading the judge's verdict.
-Checked with `show_case.py`. Checked by: `<names>`.
+Checked with `show_case.py`. Checked by: Cemon, Shrividya and Rachana.
 
 | # | id | cfg | category | judge metric | judge verdict | our verdict | agree? | why we (dis)agree |
 |---|---|---|---|---|---|---|---|---|

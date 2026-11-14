@@ -1,86 +1,120 @@
-# Lab 1 – Agentic Software Engineering (WS 2026/27)
+# Group 14 – Lab 1: From using agents to building them
 
-Starter material for Lab 1. The tasks, deadlines and grading are described on the lab sheet.
+Agentic Software Engineering, WS 2026/27, Paderborn University. Group name: *Humans in the Loop*.
 
-## Access to the UPB AI Gateway (do this first)
+## Group members
 
-Every group member needs their own API key. Official guide: https://hilfe.uni-paderborn.de/AI-Gateway
+| Name | Matriculation number |
+|---|---|
+| Aryan | 4116442 |
+| Cemon | 7398388 |
+| Rachana | 4109798 |
+| Shrividya | 7397075 |
+| Srajan | 4108654 |
 
-1. **Activate the service** (once): log in to the Service Portal https://sp.upb.de/ with your university account →
-   *Benutzerverwaltung* → *Weitere Dienste* → tab *Lehre und Studium* → *KI-Chat-Oberfläche* → *Optionen* → *Beantragen*.
-   The request is approved automatically.
-2. **Be in the university network:** the gateway only works from the university network (e.g. eduroam on campus)
-   or via the university VPN. From home, connect the VPN first: https://hilfe.uni-paderborn.de/VPN_einrichten
-3. **Create a key:** open https://ai-gateway.upb.de, log in with your university account, click *API-Key erstellen*
-   and copy the key (`sk-...`). Store it safely; you can't see it again.
-4. Keys **expire** after some time. If calls suddenly fail with `401`, create a new key and update your `.env`.
-5. The terms of use of the university's AI services apply to the API as well.
-
-Never commit the key, never paste it into a prompt, never put it into a file you submit.
+Who did what: [CONTRIBUTIONS.md](CONTRIBUTIONS.md).
 
 ## Setup
 
+Python 3.11+ and [uv](https://docs.astral.sh/uv/). All commands are run from this directory (the repository root).
+The UPB AI Gateway is only reachable from the university network or the university VPN.
+
 ```bash
-# 0. Install uv (once, no root needed), then open a new terminal (or: source ~/.bashrc)
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
-# 1. Python environment (Python 3.11+)
 uv sync                    # or: python -m venv .venv && pip install -r requirements.txt
-uv sync --extra local      # optional: local embedding / cross-encoder models (large download)
+uv sync --extra local      # only needed for Task 3 R5 (local cross-encoder, large download)
 
-# 2. Gateway key
-cp .env.example .env       # then put your key into .env (the model names are already filled in)
-
-# 3. Check (in the university network or VPN)
-uv run python common/hello_gateway.py
+cp .env.example .env       # put your own gateway key into .env (model names are already filled in)
+uv run python common/hello_gateway.py   # connection check
 ```
 
-Run all commands from this directory (the repository root).
+`.env` is not part of the submission. Models used: `openai.gpt-6-luna` for all chat, agent and judge calls,
+`kiconnect.qwen3-embedding-8b` for embeddings. The free fallback model was not used.
 
-## Models, budget and limits
-
-| Purpose | Model id | Cost |
-|---|---|
-| Default for all tasks (chat, agents, tool calling, judge) | `openai.gpt-6-luna` | $0.10 / 1M input tokens, $0.50 / 1M output tokens |
-| Free fallback | `kiconnect.qwen3.8-27b` | free |
-| Embeddings | `kiconnect.qwen3-embedding-8b` (fallback: `kiconnect.e5-mistral-7b-instruct`) | free |
-
-- **Budget:** every student has **$20 per month** on the gateway. With `gpt-6-luna` the whole lab costs a group
-  a few dollars, so you have plenty of room. It only gets expensive if you switch to one of the large models, which you don't need.
-- **Fallback:** if your budget is used up (or a teammate's key can take over), use the free fallback model:
-  `LLMClient(model=os.environ["LAB_FALLBACK_MODEL"])`. It is weaker, but supports tool calling.
-  Say in your presentation which runs used which model.
-- **Cost tracking:** `LLMClient` writes the cost of every call (`cost_usd`, reported by the gateway) into its log,
-  and `llm.usage_summary()` prints tokens and cost so far. OpenCode shows the cost of a session in its UI.
-- **Rate limits:** 100 requests per minute and at most 10 parallel requests per key. A normal agent loop stays far below this.
-  Don't send requests from more than ~5 threads at the same time. `LLMClient` retries automatically when you hit the limit.
-- **No `temperature`:** `gpt-6-luna` is a reasoning model and rejects the `temperature` parameter. Its output tokens
-  include hidden reasoning tokens, so set `max_tokens` generously (or not at all).
-- **Response cache:** the gateway caches responses. Sending exactly the same request again returns the stored answer
-  within milliseconds (the log shows `"cache_hit": true`). Keep this in mind when you measure latency, and when you
-  retry a request after a bad answer: change something (e.g. add the error message), otherwise you get the same answer again.
-
-## Contents
+## Repository layout
 
 | Folder | Content |
 |---|---|
-| `common/` | `llm_client.py` (gateway client with logging), `site_checker.py`, `embed_images.py` |
-| `task1_opencode/` | OpenCode setup guide, config template, profile template |
-| `task2_own_agent/` | specification, style guide (55 documents) |
-| `task3_rag/` | PaderQueue dataset, questions, `evaluate.py`, `judge.py` |
-| `task4_tools/` | toy repository `tinyledger`, tool interface, public tests, mock model |
+| `common/` | shared course code: `llm_client.py` (gateway client with logging), `site_checker.py`, `embed_images.py` |
+| `task1_opencode/` | profiles + images (`content/`), hello-world screenshots and site screenshots (`screenshots/`), the site built by OpenCode (`site/index.html`), exported OpenCode session (`conversation/`) |
+| `task2_own_agent/` | our coding agent (`agent.py`), retriever (`rag.py`), style guide, tests, run log (`logs/run_01.jsonl`), the generated site (`site/index.html`), screenshots, `README.md` |
+| `task3_rag/` | retrievers R1–R5, generation, evaluation, judge runs; all outputs in `results/`; `predictions_test.jsonl`; the report `REPORT.md` |
+| `task4_tools/` | contained tool layer (`tools.py`), function-calling agent (`agent.py`), adversarial tests, traces (`logs/trace.jsonl`, `logs/mock_trace.jsonl`), `final.diff`, `README.md` |
 
+## How to run
 
-## Troubleshooting
+### Task 1 – Using an agent (OpenCode)
 
-| Problem | Try this |
-|---|---|
-| `Command 'uv' not found` | Install uv (step 0 above) and open a new terminal, or use the venv route without uv |
-| `401 Unauthorized` | Key missing in `.env`, or expired: create a new one at https://ai-gateway.upb.de |
-| Connection timeout / connection refused | You are outside the university network. Connect the university VPN |
+The site was written entirely by OpenCode (`gpt-6-luna`), see `task1_opencode/conversation/session_01.md`.
+Nothing needs to be run to view it: open `task1_opencode/site/index.html` in a browser.
 
-## Rules
+```bash
+# check the site (Task 1 requirements: 7 basic checks; --full adds the Task 2 style-guide rules)
+uv run python task1_opencode/check_site.py task1_opencode/site/index.html --content task1_opencode/content
 
-- Never commit or submit your `.env` / API keys.
-- Don't use agent or RAG frameworks (LangChain, LlamaIndex, ...) in Tasks 2–4.
-- Every group member must be able to explain every part of the submission.
+# rebuild index.html from the placeholder source (this is what the agent ran)
+cd task1_opencode
+uv run python embed_images.py site/index.src.html --images content/images --out site/index.html
+cd ..
+```
+
+OpenCode setup (install, `opencode.json`, gateway key): `task1_opencode/README.md`.
+
+### Task 2 – Our own coding agent
+
+Details: `task2_own_agent/README.md`.
+
+```bash
+# run the agent (asks for human feedback when it finishes; writes logs/run_XX.jsonl)
+uv run python task2_own_agent/agent.py --content task1_opencode/content --out task2_own_agent/site/index.html
+
+uv run python task2_own_agent/rag.py          # retrieval sanity check: 12 queries with known answers
+uv run pytest task2_own_agent/tests -q        # offline tests with a fake model (no gateway needed)
+uv run python task2_own_agent/check_site.py task2_own_agent/site/index.html --full --content task1_opencode/content
+```
+
+### Task 3 – RAG under the microscope
+
+Results and discussion: `task3_rag/REPORT.md`. All numbers come from files in `task3_rag/results/`.
+The embedding cache (`task3_rag/cache/`) is not submitted; the first run rebuilds it (about 2–3 minutes).
+
+```bash
+# 1. chunking, chunk-size and alpha sweeps, R1–R5 on dev and test, metrics, retrieval cost
+uv run python task3_rag/run_retrieval.py
+
+# 2. generation on the 50-question judge sample (whole-document context, and chunk-only context for comparison)
+uv run python task3_rag/generate.py r4 --split dev --sample 50
+uv run python task3_rag/generate.py r3 --split dev --sample 50
+uv run python task3_rag/generate.py r4 --split dev --sample 50 --context chunks
+uv run python task3_rag/generate.py r3 --split dev --sample 50 --context chunks
+
+# 3. LLM judge (faithfulness, answer relevance, correctness)
+uv run python task3_rag/judge.py task3_rag/results/answers_r4_dev_sample50.jsonl --sample 50 --out task3_rag/results/judge_r4.jsonl
+uv run python task3_rag/judge.py task3_rag/results/answers_r3_dev_sample50.jsonl --sample 50 --out task3_rag/results/judge_r3.jsonl
+uv run python task3_rag/judge.py task3_rag/results/answers_r4_dev_sample50_chunkctx.jsonl --sample 50 --out task3_rag/results/judge_r4_chunkctx.jsonl
+uv run python task3_rag/judge.py task3_rag/results/answers_r3_dev_sample50_chunkctx.jsonl --sample 50 --out task3_rag/results/judge_r3_chunkctx.jsonl
+
+# 4. test predictions with the recommended config (writes task3_rag/predictions_test.jsonl)
+uv run python task3_rag/generate.py r4 --split test --predictions
+
+# 5. summary tables (no LLM calls)
+uv run python task3_rag/make_tables.py
+
+# helpers
+uv run python task3_rag/evaluate.py task3_rag/results/retrieval_r4_dev.jsonl --k 5   # metrics for one run
+uv run python task3_rag/show_case.py dev062 --config r4                              # one question side by side
+```
+
+### Task 4 – Tools for agents
+
+Details, threat model and the adversarial content we found: `task4_tools/README.md`.
+
+```bash
+uv run pytest task4_tools/tests -v                  # public contract tests + our adversarial tests
+uv run python task4_tools/reset_workspace.py
+uv run python task4_tools/agent.py --mock           # scripted fake model -> logs/mock_trace.jsonl
+uv run python task4_tools/reset_workspace.py
+uv run python task4_tools/agent.py                  # real run -> logs/trace.jsonl
+git -C task4_tools/workspace diff > task4_tools/final.diff
+```
+
+`task4_tools/workspace/` is generated by `reset_workspace.py` and is not part of the submission.
